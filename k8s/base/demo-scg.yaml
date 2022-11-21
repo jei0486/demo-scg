@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-scg-svc
+  namespace: gateway
+  labels:
+    app: demo-scg
+spec:
+  ports:
+    - name: rest
+      port: 9090
+      targetPort: http
+  selector:
+    app: demo-scg
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-scg
+  namespace: gateway
+  labels:
+    app: demo-scg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-scg
+  template:
+    metadata:
+      labels:
+        app: demo-scg
+    spec:
+      containers:
+        - name: demo-scg
+          image: docker.io/jei0486/demo-scg:v1
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 9090
+          command: ["java"]
+          args: ['-cp', '@/app/jib-classpath-file','com.demo.scg.DemoScgApplication', '--spring.config.locatin=/config/application.yaml']
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          env:
+            - name: 'spring.application.name'
+              value: 'demo-scg'
+      volumes:
+        - name: config
+          configMap:
+            name: demo-scg-configmap

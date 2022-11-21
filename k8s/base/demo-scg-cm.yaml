@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-scg-configmap
+  namespace: gateway
+data:
+  application.yaml: |
+    server:
+      port: 9090
+    
+    resilience4j.circuitbreaker:
+      configs:
+        default:
+          slidingWindowType: COUNT_BASED           
+          slidingWindowSize: 10              
+          minimumNumberOfCalls: 2               
+          failureRateThreshold: 50               
+          waitDurationInOpenState: 3000      
+        instances:
+          mycb:
+            baseConfig: default
+    
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
+      endpoint:
+        shutdown:
+          enabled: true
+        health:
+          show-details: always
+      health:
+        circuitbreakers:
+          enabled: true
+    
+    
+    logging:
+      level:
+        org.springframework.cloud.gateway: DEBUG
+        reactor.netty.http.client: DEBUG
+      pattern:
+        console: "[%d{HH:mm:ss.SSS}][%-5level][%logger{36}.%method:%line] - %msg%n"
+    
+    spring:
+      security:
+        oauth2:
+          client:
+            provider:
+              keycloak:
+                token-uri: http://host.docker.internal:8080/auth/realms/demo/protocol/openid-connect/token
+                authorization-uri: http://host.docker.internal:8080/auth/realms/demo/protocol/openid-connect/auth
+                userinfo-uri: http://host.docker.internal:8080/auth/realms/demo/protocol/openid-connect/userinfo
+                user-name-attribute: preferred_username
+            registration:
+              demo-client:
+                provider: keycloak
+                client-id: demo-client
+                client-secret: be7efd17-348c-4c63-aee9-3435bddba64f
+                authorization-grant-type: authorization_code
+                redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+    
+    
+      cloud:
+        gateway:
+          default-filters:
+            - TokenRelay
+          routes:
+            - id: demo-fe-board
+              uri: http://demo-fe.fe:8088/
+              predicates:
+                - name: Path
+                  args:
+                    patterns: /boards/**
+                - name: Method
+                  args:
+                    methods:
+                      - GET
+                      - POST
+                      - PUT
+                      - DELETE
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: mycb
+                    fallbackUri: forward:/fallback  
+              metadata:
+                connect-timeout: 2500
+                response-timeout: 2500
+    
+            - id: demo-fe-api
+              uri: http://demo-fe.fe:8088/
+              predicates:
+                - Path=/api/**
