@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: demo-scg
-          image: docker.io/jei0486/demo-scg:v1
+          image: docker.io/jei0486/demo-scg
           imagePullPolicy: Always
           ports:
             - name: http
