@@ -24,7 +24,6 @@ pipeline {
             branch: "$RELEASE_BRANCH",
             credentialsId: "$SOURCECODE_JENKINS_CREDENTIAL_ID"
             sh 'ls -al'
-            sh 'chmod +x gradlew'
         }
       }
 
@@ -34,6 +33,11 @@ pipeline {
         }
     }
 
+    stage('workspace clear'){
+        steps {
+            cleanWs()
+        }
+    }
 
     }
 }
