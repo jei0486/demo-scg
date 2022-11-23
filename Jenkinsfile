@@ -23,7 +23,8 @@ pipeline {
             git url: "$SOURCE_CODE_URL",
             branch: "$RELEASE_BRANCH",
             credentialsId: "$SOURCECODE_JENKINS_CREDENTIAL_ID"
-            sh 'ls'
+            sh 'ls -al'
+            sh 'chmod +x gradlew'
         }
       }
 
