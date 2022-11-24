@@ -29,7 +29,9 @@ pipeline {
 
     stage('Build') {
         steps {
-            withDockerRegistry([ credentialsId: 'dockerhub', url: '' ]) { sh "skaffold build -p dev -t ${TAG}"}
+            withDockerRegistry([ credentialsId: 'dockerhub', url: '' ]) {
+              sh "skaffold build -p dev -t ${TAG}"
+            }
         }
     }
 

@@ -12,7 +12,7 @@ profiles:
             args:
               - -DskipTests
               - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=dev"  # jib 플러그인을 통해 dev profile에 대해 수행
-            fromImage: docker.io/library/openjdk:11.0.11-jre         # 실행을 위한 runtime image
+            fromImage: docker.io/library/openjdk:11.0.11-jre              # 실행을 위한 runtime image
     deploy:
       kustomize:
         paths:
