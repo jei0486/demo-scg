@@ -61,7 +61,7 @@ spring:
         - TokenRelay
       routes:
         - id: demo-fe-board
-          uri: http://localhost:8088/
+          uri: http://localhost:9099/
           predicates:
             - name: Path
               args:
@@ -83,7 +83,7 @@ spring:
             response-timeout: 2500
 
         - id: demo-fe-api
-          uri: http://localhost:8088/
+          uri: http://localhost:9099/
           predicates:
             - Path=/api/**
 
