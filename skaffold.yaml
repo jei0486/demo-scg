@@ -7,10 +7,6 @@ profiles:
         push: true # false는 로컬 테스트
       artifacts:
         - image: docker.io/jei0486/demo-scg # on dev server (docker hub에 push하고 실행)
-          entrypoint: java
-          args:
-            - -jar
-            - /app/application.jar
           # - image: demo-scg   # local(로컬/push없이 실행만)
           jib:
             args:
