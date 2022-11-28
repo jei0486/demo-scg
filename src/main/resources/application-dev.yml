@@ -52,7 +52,7 @@ spring:
           demo-client:
             provider: keycloak
             client-id: demo-client
-            client-secret: 061e52a9-8e2c-4687-8d75-ecd87f769230
+            client-secret: e635fe59-edcd-4588-85db-4ca7c0045ae1
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
   cloud:
