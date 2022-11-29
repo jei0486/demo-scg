@@ -57,17 +57,17 @@ pipeline {
                    git url: "https://$GIT_OPS_URL",
                        branch: "$GIT_OPS_BRANCH",
                        credentialsId: "$SOURCECODE_JENKINS_CREDENTIAL_ID"
-                          sh '''
+                          sh """
                             ls -la
                             cd ./demo-scg/blue-green
                             kustomize edit set image jei0486/demo-scg:${customVersion}
                             git config user.email "jei0486@gmail.com"
                             git config user.name "jei0486"
                             git add .
-                            git commit -am "update image tag ${customVersion}"
+                            git commit -am 'update image tag ${customVersion}'
                             git remote set-url --push origin https://${SECRET}@$GIT_OPS_URL
                             git push origin $GIT_OPS_BRANCH
-                            '''
+                            """
                }
             }
        }
