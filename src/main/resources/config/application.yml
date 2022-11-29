@@ -44,9 +44,9 @@ spring:
       client:
         provider:
           keycloak:
-            token-uri: http://localhost:8080/auth/realms/demo/protocol/openid-connect/token
-            authorization-uri: http://localhost:8080/auth/realms/demo/protocol/openid-connect/auth
-            userinfo-uri: http://localhost:8080/auth/realms/demo/protocol/openid-connect/userinfo
+            token-uri: http://host.docker.internal:8080/auth/realms/demo/protocol/openid-connect/token
+            authorization-uri: http://host.docker.internal:8080/auth/realms/demo/protocol/openid-connect/auth
+            userinfo-uri: http://host.docker.internal:8080/auth/realms/demo/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
         registration:
           demo-client:
@@ -61,7 +61,7 @@ spring:
         - TokenRelay
       routes:
         - id: demo-fe-board
-          uri: http://localhost:9099/
+          uri: http://demo-fe-svc.fe:9099/
           predicates:
             - name: Path
               args:
@@ -83,7 +83,7 @@ spring:
             response-timeout: 2500
 
         - id: demo-fe-api
-          uri: http://localhost:9099/
+          uri: http://demo-fe-svc.fe:9099/
           predicates:
             - Path=/api/**
 
