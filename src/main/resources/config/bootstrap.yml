@@ -1,3 +1,6 @@
+server:
+  port: 9090
+
 spring:
   application:
     name: demo-scg
@@ -8,7 +11,7 @@ spring:
         enabled: true
       config:
         enabled: true
-        name: demo-scg
+        name: demo-scg-configmap
         namespace: gateway
         sources:
           # Spring Cloud Kubernetes looks up a ConfigMap named demo-scg-configmap in namespace gateway
