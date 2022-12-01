@@ -1,0 +1,21 @@
+management:
+  endpoint:
+    restart.enabled : true
+    health.enabled : true
+    info.enabled : true
+
+spring:
+  application:
+    name: demo-scg
+  cloud:
+    kubernetes:
+      reload:
+        period: 1000
+        enabled: true
+      config:
+        enabled: true
+        name: demo-scg
+        namespace: gateway
+        sources:
+          # Spring Cloud Kubernetes looks up a ConfigMap named demo-scg-configmap in namespace gateway
+          - name: demo-scg-configmap
