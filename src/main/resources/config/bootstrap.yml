@@ -3,9 +3,12 @@ server:
 
 management:
   endpoint:
-    restart.enabled : true
-    health.enabled : true
-    info.enabled : true
+    web:
+      exposure:
+        include: "refresh"
+    restart.enabled: true
+    health.enabled: true
+    info.enabled: true
 
 spring:
   application:
