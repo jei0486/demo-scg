@@ -27,6 +27,8 @@ dependencies {
 	// Gateway
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+
 	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-kubernetes-config
 	implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-config:1.1.10.RELEASE'
 
