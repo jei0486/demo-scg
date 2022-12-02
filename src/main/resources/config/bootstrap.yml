@@ -23,7 +23,7 @@ spring:
         enabled: true
       config:
         enabled: true
-        name: demo-scg-configmap
+        name: demo-scg
         namespace: gateway
         sources:
           # Spring Cloud Kubernetes looks up a ConfigMap named demo-scg-configmap in namespace gateway
