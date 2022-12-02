@@ -13,8 +13,6 @@ management:
 spring:
   application:
     name: demo-scg
-  profiles:
-    active: dev
   cloud:
     kubernetes:
       reload:
