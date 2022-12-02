@@ -21,6 +21,7 @@ spring:
       reload:
         period: 1000
         enabled: true
+        monitoring-config-maps: true
       config:
         enabled: true
         name: demo-scg
