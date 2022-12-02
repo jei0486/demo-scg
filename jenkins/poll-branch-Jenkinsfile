@@ -27,7 +27,7 @@ pipeline {
                      userRemoteConfigs: [[url: "$SOURCE_CODE_URL",
                      credentialsId: "$SOURCECODE_JENKINS_CREDENTIAL_ID" ]],
                      branches: [[name: "refs/tags/${TAG}"]]],
-                     poll: false
+                     poll: true
          }
        }
 
