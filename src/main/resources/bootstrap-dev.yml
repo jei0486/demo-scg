@@ -5,17 +5,17 @@ management:
   endpoint:
     web:
       exposure:
-        include: "refresh"
+        include: "*"
     restart.enabled: true
     health.enabled: true
     info.enabled: true
 
 spring:
-  profiles:
-    active: dev
   application:
     name: demo-scg
   cloud:
+    discovery.enabled: false
+
     kubernetes:
       enabled: true # enables all the sub-configurations
       reload:
@@ -29,4 +29,3 @@ spring:
         sources:
           # Spring Cloud Kubernetes looks up a ConfigMap named demo-scg-configmap in namespace gateway
           - name: demo-scg-configmap
-

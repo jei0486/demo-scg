@@ -46,12 +46,6 @@ spec:
           env:
             - name: 'spring.application.name'
               value: 'demo-scg'
-            - name: 'spring.profiles.active'
-              value: 'dev'
-            - name: "KUBERNETES_NAMESPACE"
-              valueFrom:
-                fieldRef:
-                  fieldPath: "metadata.namespace"
       volumes:
         - name: config
           configMap:

@@ -43,7 +43,6 @@ data:
         console: "[%d{HH:mm:ss.SSS}][%-5level][%logger{36}.%method:%line] - %msg%n"
     
     spring:
-      profiles.active: dev
       security:
         oauth2:
           client:
@@ -57,7 +56,7 @@ data:
               demo-client:
                 provider: keycloak
                 client-id: demo-client
-                client-secret: 83f3e948-3f8c-49da-af7f-87a42d5ea6fd
+                client-secret: c8540f51-40f8-4e21-ac26-1fc0a7f11dd2
                 authorization-grant-type: authorization_code
                 redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
     
