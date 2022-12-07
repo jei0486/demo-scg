@@ -61,7 +61,7 @@ pipeline {
                         git config user.email "jei0486@gmail.com"
                         git config user.name "jei0486"
                         git add .
-                        git commit -am "update image tag ${TAG}"
+                        git commit -am "배포 버전 ${TAG}"
                         git remote set-url --push origin https://${SECRET}@$GIT_OPS_URL
                         git push origin $GIT_OPS_BRANCH
                         '''
@@ -70,5 +70,11 @@ pipeline {
        }
 
 
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
     }
 }

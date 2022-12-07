@@ -9,7 +9,7 @@ metadata:
 spec:
   ports:
     - name: rest
-      port: 9090
+      port: 8080
       targetPort: http
   selector:
     app: demo-scg
@@ -37,7 +37,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - name: http
-              containerPort: 9090
+              containerPort: 8080
           command: ["java"]
           args: ['-cp', '@/app/jib-classpath-file','com.demo.scg.DemoScgApplication', '--spring.config.locatin=/config/application.yaml']
           volumeMounts:
